@@ -18,8 +18,14 @@ iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 -j DNAT --to-destinati
 <!-- Enforce packet filtering -->
 iptables -P FORWARD DROP
 
-<!-- Allow initial request to public server -->
-iptables -A FORWARD -p tcp -d 10.0.0.2 --dport 80 -j ACCEPT
+<!-- Allow HTTP 80 to public server -->
+iptables -A FORWARD -p tcp -d 10.0.0.0/24 --dport 80 -j ACCEPT
+
+<!-- Allow HTTPS 443 to public server -->
+iptables -A FORWARD -p tcp -d 10.0.0.0/24 --dport 443 -j ACCEPT
+
+<!-- Allow SSH 22 to public server -->
+iptables -A FORWARD -p tcp -d 10.0.0.0/24 --dport 22 -j ACCEPT
 
 <!-- Allow return traffic from public server to LAN -->
-iptables -A FORWARD -p tcp -s 10.0.0.2 --sport 80 -d 192.168.10.0/24 -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -p tcp -s 10.0.0.0/24 -m state --state ESTABLISHED,RELATED -j ACCEPT
