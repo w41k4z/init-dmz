@@ -1,7 +1,12 @@
-<!-- Setting the ip address of the interface eth0, eth1 and eth2 -->
-ip addr add 192.168.10.1/24 dev eth0 <!-- LAN -->
-ip addr add 10.0.0.1/24 dev eth1 <!-- DMZ -->
-ip addr add 192.168.122.10/24 dev eth2 <!-- WAN -->
+<!-- eth0: LAN -->
+<!-- eth1: DMZ -->
+<!-- eth2: WAN -->
+
+
+<!-- Setting the ip address of the interfaces eth0, eth1 and eth2 -->
+ip addr add 192.168.10.1/24 dev eth0
+ip addr add 10.0.0.1/24 dev eth1
+ip addr add 192.168.122.10/24 dev eth2
 
 <!-- Default route pointing to WAN -->
 ip route add default via 192.168.122.1
