@@ -39,6 +39,11 @@ iptables -A FORWARD -i eth0 -o eth2 -s 192.168.10.0/24 -m state --state NEW,ESTA
 <!-- Allow WAN to return traffic only from established and related connection -->
 iptables -A FORWARD -i eth2 -o eth0 -d 192.168.10.0/24 -m state --state ESTABLISHED,RELATED -j ACCEPT
 
+<!-- Use Google’s public DNS server -->
+echo "nameserver 8.8.8.8" > /etc/resolv.conf
 
 <!-- Squid guard blacklist url -->
 https://raw.githubusercontent.com/4skinSkywalker/Anti-Porn-HOSTS-File/refs/heads/master/HOSTS.txt
+
+<!-- run squid -->
+squid -N -d 1

@@ -10,4 +10,9 @@ RUN apk update && apk add --no-cache \
     net-tools \
     tcpdump
 
+
+# Set proxy environment variables globally inside the container
+ENV http_proxy="http://192.168.10.1:3128"
+ENV https_proxy="http://192.168.10.1:3128"
+
 CMD ["/bin/sh"]
