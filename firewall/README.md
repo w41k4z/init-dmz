@@ -14,9 +14,6 @@ ip route add default via 192.168.122.1
 <!-- Enabling ip forwarding -->
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
-<!-- DNAT config to expose public server to LAN through its eth0 interface (port: 8080) -->
-iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8080 -j DNAT --to-destination 10.0.0.2:80
-
 <!-- Enforce packet filtering -->
 iptables -P FORWARD DROP
 
@@ -41,3 +38,7 @@ iptables -A FORWARD -i eth0 -o eth2 -s 192.168.10.0/24 -m state --state NEW,ESTA
 
 <!-- Allow WAN to return traffic only from established and related connection -->
 iptables -A FORWARD -i eth2 -o eth0 -d 192.168.10.0/24 -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+
+<!-- Squid guard blacklist url -->
+https://raw.githubusercontent.com/4skinSkywalker/Anti-Porn-HOSTS-File/refs/heads/master/HOSTS.txt
